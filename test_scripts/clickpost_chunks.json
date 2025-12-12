@@ -1,0 +1,262 @@
+[
+  {
+    "text": "API: Clickpost\nEndpoint: POST /v4/create-order/\nFull URL: https://www.clickpost.in/api/v4/create-order/\n\nSummary: Create Order: Rest of the World\nDescription: This API takes the shipment details, drop information, pickup information and creates an order with specified carrier partner. This applies for shipments created and transported within North America, Europe, Middle East and South-East Asia and cross-border shipments.\n\nParameters:\n  - username (query, REQUIRED, string): Username, unique to the enterprise profile\n  - key (query, REQUIRED, string): Unique key to verify/authenticate the enterprise profile\n\nRequest Body:\n  Content-Type: application/json\n  Required Fields:\n    - RAW_BODY (string) [REQUIRED]: Payload of the request, containing all details of the order\n\nResponses:\n  200: 200\n  400: 400\n",
+    "metadata": {
+      "endpoint": "POST /v4/create-order/",
+      "method": "POST",
+      "path": "/v4/create-order/",
+      "api": "Clickpost",
+      "summary": "Create Order: Rest of the World"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: GET /v4/create-order/\nFull URL: https://www.clickpost.in/api/v4/create-order/\n\nSummary: Fetch Order Details: Rest of the World\nDescription: Given an AWB and a carrier partner ID, fetch details of a shipment placed with that AWB. Works for shipments created and transported within North America, Europe, Middle East and South-East Asia and all cross-border shipments. Especially useful when an async order is placed with the V4 API.\n\nParameters:\n  - username (query, optional, string): Username of the customer\n  - key (query, REQUIRED, string): Unique license key provided by Clickpost for the enterprise, used for authentication\n  - awb (query, REQUIRED, string): AWB of the order to receive details for\n  - cp_id (query, REQUIRED, string): Partner ID of the courier responsible for delivering the shipment\n\nResponses:\n  200: 200\n  400: 400\n",
+    "metadata": {
+      "endpoint": "GET /v4/create-order/",
+      "method": "GET",
+      "path": "/v4/create-order/",
+      "api": "Clickpost",
+      "summary": "Fetch Order Details: Rest of the World"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: POST /v2/tracking/awb-register/\nFull URL: https://www.clickpost.in/api/v2/tracking/awb-register/\n\nSummary: Register shipment for tracking: V2\nDescription: Register an AWB for tracking updates with Clickpost, given the AWB number, carrier partner ID, shipment information, pick-up and drop information, and additional details as input.\n\nParameters:\n  - key (query, optional, string): Key that was provided by Clickpost\n\nRequest Body:\n  Content-Type: application/json\n  Required Fields:\n    - RAW_BODY (string) [REQUIRED]: Enter the request body\n\nResponses:\n  200: 200\n",
+    "metadata": {
+      "endpoint": "POST /v2/tracking/awb-register/",
+      "method": "POST",
+      "path": "/v2/tracking/awb-register/",
+      "api": "Clickpost",
+      "summary": "Register shipment for tracking: V2"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: GET /v1/cancel-order/\nFull URL: https://www.clickpost.in/api/v1/cancel-order/\n\nSummary: Cancellation\nDescription: Cancellation API allows you to cancel the shipment in the carrier partner's system\n\nParameters:\n  - username (query, REQUIRED, string): The username of the Clickpost dashboard\n  - key (query, REQUIRED, string): API key given to enterprise by the Clickpost team\n  - waybill (query, REQUIRED, string): Air Waybill of the order\n  - cp_id (query, REQUIRED, integer): Carrier Partner ID of the carrier\n  - account_code (query, REQUIRED, string): Courier partner account name configured on the Clickpost dashboard\n  - manually_update_status (query, optional, boolean): If the value of this field is \"True\" then Clickpost will update the tracking status of AWB to \"Cancelled\" manually once a successful response is received from the courier partner.\n\nResponses:\n  200: 200\n  400: 400\n",
+    "metadata": {
+      "endpoint": "GET /v1/cancel-order/",
+      "method": "GET",
+      "path": "/v1/cancel-order/",
+      "api": "Clickpost",
+      "summary": "Cancellation"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: GET /v1/ndr_user_feedback/\nFull URL: https://www.clickpost.in/api/v1/ndr_user_feedback/\n\nSummary: Customer Feedback\nDescription: This API enables customers to retrieve feedback from end-users in case of failure of delivery of any shipment. Users can update their preferred location of delivery at Clickpost Tracking Page, and those changes are retrieved by this API.\n\nParameters:\n  - username (query, REQUIRED, string): The username of the clickpost dashboard\n  - key (query, REQUIRED, string): API key given to enterprise by the clickpost onboarding team\n  - start_date (query, REQUIRED, integer): Epoch time (in secs) of start of the period in which the feedbacks were provided\n  - end_date (query, REQUIRED, integer): Epoch time (in secs) of end of the period in which the feedbacks were provided\n\nResponses:\n  200: 200\n",
+    "metadata": {
+      "endpoint": "GET /v1/ndr_user_feedback/",
+      "method": "GET",
+      "path": "/v1/ndr_user_feedback/",
+      "api": "Clickpost",
+      "summary": "Customer Feedback"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: POST /v2/ndr-update-api\nFull URL: https://www.clickpost.in/api/v2/ndr-update-api\n\nSummary: NDR Action Update\nDescription: This API instructs the courier company to take action on an AWB. Using this API, enterprises can Reattempt the shipment with the updated address, preferred delivery date, and phone number. Enterprises can also Initiate a Return to Origin\n\nParameters:\n  - username (query, REQUIRED, string): Enter the username of the Clickpost dashboard\n  - key (query, REQUIRED, string): Enter the API key given to you by the Clickpost team\n\nRequest Body:\n  Content-Type: application/json\n  Required Fields:\n    - RAW_BODY (string) [REQUIRED]: Enter the request body\n\nResponses:\n  200: 200\n",
+    "metadata": {
+      "endpoint": "POST /v2/ndr-update-api",
+      "method": "POST",
+      "path": "/v2/ndr-update-api",
+      "api": "Clickpost",
+      "summary": "NDR Action Update"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: POST /v1/create-pickup/\nFull URL: https://www.clickpost.in/api/v1/create-pickup/\n\nSummary: Pickup Request: India\nDescription: Given all pickup and carrier partner details, create a new pickup request for select carriers. Applicable for shipments created and transported within India only.\n\nParameters:\n  - username (query, REQUIRED, string): \n  - key (query, REQUIRED, string): License key for the registered user\n\nRequest Body:\n  Content-Type: application/json\n\nResponses:\n  200: 200\n",
+    "metadata": {
+      "endpoint": "POST /v1/create-pickup/",
+      "method": "POST",
+      "path": "/v1/create-pickup/",
+      "api": "Clickpost",
+      "summary": "Pickup Request: India"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: POST /v3/tracking/awb-register/\nFull URL: https://www.clickpost.in/api/v3/tracking/awb-register/\n\nSummary: Register shipment for tracking: V3 (Recommended)\nDescription: Register an AWB for tracking updates with Clickpost, given the AWB number, carrier partner ID, shipment information, pick-up and drop information, and additional details as input.\n\nParameters:\n  - key (query, optional, string): Enter the API key given to you by the clickpost onboarding team\n\nRequest Body:\n  Content-Type: application/json\n  Required Fields:\n    - RAW_BODY (string) [REQUIRED]: Enter the request body\n\nResponses:\n  200: 200\n",
+    "metadata": {
+      "endpoint": "POST /v3/tracking/awb-register/",
+      "method": "POST",
+      "path": "/v3/tracking/awb-register/",
+      "api": "Clickpost",
+      "summary": "Register shipment for tracking: V3 (Recommended)"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: GET /v1/fetch-accounts?\nFull URL: https://www.clickpost.in/api/v1/fetch-accounts?\n\nSummary: Fetch Accounts from Clickpost\nDescription: With help of this API enterprises can get all the carrier partner accounts that are currently active on their Clickpost dashboard. This API would be useful if the enterprise is not using Clickpost's allocation rules and just require the active list of accounts to assign the carrier manually\n\nParameters:\n  - key (query, REQUIRED, string): API key given to enterprise by the clickpost onboarding team\n  - active (query, REQUIRED, boolean): Whether enterprise wants to fetch all active courier partner accounts or not\n\nResponses:\n  200: 200\n",
+    "metadata": {
+      "endpoint": "GET /v1/fetch-accounts?",
+      "method": "GET",
+      "path": "/v1/fetch-accounts?",
+      "api": "Clickpost",
+      "summary": "Fetch Accounts from Clickpost"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: POST /v1/edit-order/\nFull URL: https://www.clickpost.in/api/v1/edit-order/\n\nSummary: Edit Order\nDescription: Edit Order API allows the enterprise to edit specific details for a shipment that has already been manifested.\n\nParameters:\n  - username (query, REQUIRED, string): Enter the username of the clickpost dashboard\n  - key (query, REQUIRED, string): Enter the API key given to you by the clickpost onboarding team\n\nRequest Body:\n  Content-Type: application/json\n  Required Fields:\n    - RAW_BODY (string) [REQUIRED]: Enter the request body\n\nResponses:\n  200: 200\n",
+    "metadata": {
+      "endpoint": "POST /v1/edit-order/",
+      "method": "POST",
+      "path": "/v1/edit-order/",
+      "api": "Clickpost",
+      "summary": "Edit Order"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: POST /v1/recommendation_api/\nFull URL: https://www.clickpost.in/api/v1/recommendation_api/\n\nSummary: Fetch Recommended Carriers: India\nDescription: Our recommendation API helps you decide amongst your available Carrier Partners, the best, most efficient and dependable choice of delivery for any given package.\n\nIt makes these decisions based on historical data on deliveries, delays and other internal parameters in the user-specified location.\n\nParameters:\n  - key (query, REQUIRED, string): Enter the API key given to you by the clickpost onboarding team\n\nRequest Body:\n  Content-Type: application/json\n  Required Fields:\n    - RAW_BODY (string) [REQUIRED]: Enter the request body\n\nResponses:\n  200: 200\n  400: 400\n",
+    "metadata": {
+      "endpoint": "POST /v1/recommendation_api/",
+      "method": "POST",
+      "path": "/v1/recommendation_api/",
+      "api": "Clickpost",
+      "summary": "Fetch Recommended Carriers: India"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: POST /v2/recommendation/\nFull URL: https://www.clickpost.in/api/v2/recommendation/\n\nSummary: Fetch Recommended Carriers: Rest of the World and Cross Border\nDescription: Our recommendation API helps you decide amongst your available Carrier Partners, the best, most efficient and dependable choice of delivery for any given package.\n\nIt makes these decisions based on historical data on deliveries, delays and other internal parameters in the user-specified location.\n\nThis API can be used for shipments in the GCC, North America, and European Countries.\n\nParameters:\n  - key (query, REQUIRED, string): Enter the API key given to you by the clickpost onboarding team\n\nRequest Body:\n  Content-Type: application/json\n  Required Fields:\n    - RAW_BODY (string) [REQUIRED]: Enter the request body\n\nResponses:\n  200: 200\n  400: 400\n",
+    "metadata": {
+      "endpoint": "POST /v2/recommendation/",
+      "method": "POST",
+      "path": "/v2/recommendation/",
+      "api": "Clickpost",
+      "summary": "Fetch Recommended Carriers: Rest of the World and Cross Border"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: GET /v1/audit-log-data/\nFull URL: https://www.clickpost.in/api/v1/audit-log-data/\n\nSummary: Fetch Audit Logs\nDescription: Fetch Audit Logs API helps you to fetch the activity logs on actions performed by various users for your account on Clickpost. API gives all the activity logs performed for an hour together in the API response\n\nParameters:\n  - key (query, REQUIRED, string): API key given to enterprise by the clickpost onboarding team\n  - log_epoch_time (query, REQUIRED, string): epoch time for hour for which logs are to be retrieved\n\nResponses:\n  200: 200\n",
+    "metadata": {
+      "endpoint": "GET /v1/audit-log-data/",
+      "method": "GET",
+      "path": "/v1/audit-log-data/",
+      "api": "Clickpost",
+      "summary": "Fetch Audit Logs"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: GET /v1/fetch-shipment-count/\nFull URL: https://www.clickpost.in/api/v1/fetch-shipment-count/\n\nSummary: Fetch Daily Shipments Created Count\nDescription: With help of this API enterprises can get the count of shipments created/registered on the Clickpost platform date-wise to track the performance on a daily bases.\n\nParameters:\n  - key (query, REQUIRED, string): API key given to enterprise by the clickpost onboarding team\n  - start-date (query, REQUIRED, string): Start date in YYYY-MM-DD format\n  - end-date (query, REQUIRED, string): End date in YYYY-MM-DD format\n\nResponses:\n  200: 200\n",
+    "metadata": {
+      "endpoint": "GET /v1/fetch-shipment-count/",
+      "method": "GET",
+      "path": "/v1/fetch-shipment-count/",
+      "api": "Clickpost",
+      "summary": "Fetch Daily Shipments Created Count"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: GET /v3/create-order/\nFull URL: https://www.clickpost.in/api/v3/create-order/\n\nSummary: Fetch Order Details: India\nDescription: Given an AWB and a carrier partner ID, fetch details of a shipment placed with that AWB. Works only for shipments created and transported within India.\n\nParameters:\n  - username (query, optional, string): Username of the customer\n  - key (query, REQUIRED, string): Unique license key provided by Clickpost for the enterprise, used for authentication\n  - awb (query, REQUIRED, string): AWB of the order to receive details for\n  - cp_id (query, REQUIRED, string): Partner ID of the courier responsible for delivering the shipment\n\nResponses:\n  200: 200\n  400: 400\n",
+    "metadata": {
+      "endpoint": "GET /v3/create-order/",
+      "method": "GET",
+      "path": "/v3/create-order/",
+      "api": "Clickpost",
+      "summary": "Fetch Order Details: India"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: POST /v3/create-order/\nFull URL: https://www.clickpost.in/api/v3/create-order/\n\nSummary: Create Order: India\nDescription: This API takes the shipment details, drop information, pickup information and creates an order with specified carrier partner. Works only for shipments created and transported within India.\n\nParameters:\n  - username (query, REQUIRED, string): Username, unique to the enterprise profile\n  - key (query, REQUIRED, string): Unique key to verify/authenticate the enterprise profile\n\nRequest Body:\n  Content-Type: application/json\n  Required Fields:\n    - RAW_BODY (string) [REQUIRED]: Payload of the request, containing all details of the order\n\nResponses:\n  200: 200\n",
+    "metadata": {
+      "endpoint": "POST /v3/create-order/",
+      "method": "POST",
+      "path": "/v3/create-order/",
+      "api": "Clickpost",
+      "summary": "Create Order: India"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: GET /v1/shipment-security-key\nFull URL: https://www.clickpost.in/api/v1/shipment-security-key\n\nSummary: Fetch shipment security key\nDescription: Fetch shipment security key API give the security key for each shipment that you can consume and store corresponding to a shipment in the system.\n\nThis security key is useful if you have the security feature enabled on Clickpost's tracking page. If the security feature is enabled on your Clickpost tracking page, you need to ensure you consume the shipment security key and pass it in URL param key= while rendering the tracking page at your end.\n\nParameters:\n  - key (query, REQUIRED, string): API key given to enterprise by the clickpost onboarding team\n  - waybill (query, REQUIRED, string): Airway bill number for which the security key needs to be fetched\n  - cp_id (query, REQUIRED, string): Carrier Partner ID (https://track.clickpost.in/courier_partner)\n\nResponses:\n  200: 200\n",
+    "metadata": {
+      "endpoint": "GET /v1/shipment-security-key",
+      "method": "GET",
+      "path": "/v1/shipment-security-key",
+      "api": "Clickpost",
+      "summary": "Fetch shipment security key"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: POST /v1/enable_shipment_notification/\nFull URL: https://www.clickpost.in/api/v1/enable_shipment_notification/\n\nSummary: Whatsapp opt-out/opt-in API\nDescription: The WhatsApp opt-in API allows you to inform Clickpost systems if WhatsApp communication shall be enabled/disabled for a particular shipment.\n\nParameters:\n  - key (query, REQUIRED, string): Unique license key of the customer, used for authentication\n\nRequest Body:\n  Content-Type: application/json\n  Required Fields:\n    - RAW_BODY (string) [optional]: \n\nResponses:\n  200: 200\n  400: 400\n",
+    "metadata": {
+      "endpoint": "POST /v1/enable_shipment_notification/",
+      "method": "POST",
+      "path": "/v1/enable_shipment_notification/",
+      "api": "Clickpost",
+      "summary": "Whatsapp opt-out/opt-in API"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: GET /v1/updated-order\nFull URL: https://www.clickpost.in/api/v1/updated-order\n\nSummary: Fetch updated shipment list\nDescription: The API retrieves the latest shipment tracking status updates between the specified start and end time. This API takes the start date and end date and returns the data for all the AWBs which were updated during this time period\n\nParameters:\n  - key (query, REQUIRED, string): Enter the API key given to you by the clickpost onboarding team\n  - username (query, REQUIRED, string): Clickpost API Username: Provided by Clickpost Team\n  - start_date (query, REQUIRED, string): start time in epoch (seconds). Example: 1616580960\n  - end_date (query, REQUIRED, string): end time in epoch (seconds). Difference between start time and end time cannot be greater than 1800 seconds(30 mins)\n\nResponses:\n  200: 200\n",
+    "metadata": {
+      "endpoint": "GET /v1/updated-order",
+      "method": "GET",
+      "path": "/v1/updated-order",
+      "api": "Clickpost",
+      "summary": "Fetch updated shipment list"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: POST /v1/reports/enterprise_dashboard_report/\nFull URL: https://www.clickpost.in/api/v1/reports/enterprise_dashboard_report/\n\nSummary: Report Request\nDescription: Using this API, you can fetch all the shipment updates received for a day in Clickpost.\n\nThe start time and end time are in UTC.\n\nParameters:\n  - key (query, REQUIRED, string): Enter the API key given to you by the clickpost onboarding team\n\nRequest Body:\n  Content-Type: application/json\n  Required Fields:\n    - RAW_BODY (string) [REQUIRED]: Enter the request body\n\nResponses:\n  200: 200\n  400: 400\n",
+    "metadata": {
+      "endpoint": "POST /v1/reports/enterprise_dashboard_report/",
+      "method": "POST",
+      "path": "/v1/reports/enterprise_dashboard_report/",
+      "api": "Clickpost",
+      "summary": "Report Request"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: GET /v1/reports/enterprise_dashboard_report/\nFull URL: https://www.clickpost.in/api/v1/reports/enterprise_dashboard_report/\n\nSummary: Report Request Tracking: Get status/data of a request\nDescription: Using this API, you can fetch all the shipment updates received for a day in Clickpost.\n\nParameters:\n  - key (query, REQUIRED, string): Enter the API key given to you by the clickpost onboarding team\n  - report_reference_number (query, REQUIRED, string): \n\nResponses:\n  200: 200\n  500: 500\n",
+    "metadata": {
+      "endpoint": "GET /v1/reports/enterprise_dashboard_report/",
+      "method": "GET",
+      "path": "/v1/reports/enterprise_dashboard_report/",
+      "api": "Clickpost",
+      "summary": "Report Request Tracking: Get status/data of a request"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: GET /v1/return_order_poll/\nFull URL: https://www.clickpost.in/api/v1/return_order_poll/\n\nSummary: Returns Polling Delta API\nDescription: The Return Polling Delta API is used to fetch all the return requests raised in the Clickpost system in a 60 minute window. This can be considered as a fallback mechanism to the Return Request Received Webhook mentioned above that is already in place to share this data.\n\nParameters:\n  - key (query, REQUIRED, string): Enter the API key given to you by the clickpost onboarding team\n  - user_name (query, REQUIRED, string): Username of the Enterprise given Clickpost team\n  - start_time (query, REQUIRED, string): Start time for which the returns needs to be retrieved\n  - end_time (query, REQUIRED, string): End time for which the returns needs to be retrieved\n\nResponses:\n  200: 200\n  301: 301\n  400: 400\n",
+    "metadata": {
+      "endpoint": "GET /v1/return_order_poll/",
+      "method": "GET",
+      "path": "/v1/return_order_poll/",
+      "api": "Clickpost",
+      "summary": "Returns Polling Delta API"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: POST /v2/create-pickup/\nFull URL: https://www.clickpost.in/api/v2/create-pickup/\n\nSummary: Pickup Request: Rest of the World\nDescription: Given all pickup and carriers partner details, create a new pickup request for select carriers. Applicable for all worldwide and cross-border shipments.\n\nParameters:\n  - username (query, REQUIRED, string): Username, unique to the enterprise profile\n  - key (query, REQUIRED, string): Unique key to verify/authenticate the enterprise profile\n\nRequest Body:\n  Content-Type: application/json\n  Required Fields:\n    - RAW_BODY (string) [optional]: Payload of the request, containing all details of the order\n\nResponses:\n  200: 200\n",
+    "metadata": {
+      "endpoint": "POST /v2/create-pickup/",
+      "method": "POST",
+      "path": "/v2/create-pickup/",
+      "api": "Clickpost",
+      "summary": "Pickup Request: Rest of the World"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: GET /v2/pincode_details/\nFull URL: https://www.clickpost.in/api/v2/pincode_details/\n\nSummary: Pincode to City and State API\nDescription: The API takes the 6 digit Indian pincode and returns the corresponding city and state\n\nParameters:\n  - pincode (query, REQUIRED, string): valid 6 digit Indian pincode\n  - key (query, REQUIRED, string): Clickpost API Key\n\nResponses:\n  200: 200\n",
+    "metadata": {
+      "endpoint": "GET /v2/pincode_details/",
+      "method": "GET",
+      "path": "/v2/pincode_details/",
+      "api": "Clickpost",
+      "summary": "Pincode to City and State API"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: GET /v1/fetch/shippinglabel/\nFull URL: https://www.clickpost.in/api/v1/fetch/shippinglabel/\n\nSummary: Fetch Shipping Label\n\nParameters:\n  - username (query, REQUIRED, string): Clickpost account username: you ll get it from your Clickpost relationship manager\n  - key (query, REQUIRED, string): Unique API key for your Clickpost account. Will be shared by your Clickpost relationship manager\n  - waybill (query, REQUIRED, string): Unique airway bill number or tracking ID provided by the carrier for the shipment\n  - cp_id (query, REQUIRED, integer): Clickpost's Courier Partner ID: https://track.clickpost.in/courier_partner\n  - regenerate (query, optional, string): Will always be false if you wish to fetch earlier generated label. If you pass regenerate=true, Clickpost systems will try to fetch the label again from carriers and share it [Not recommended]. Always pass regenerate=false unless recommended by your Clickpost relationship manager\n\nResponses:\n  200: 200\n",
+    "metadata": {
+      "endpoint": "GET /v1/fetch/shippinglabel/",
+      "method": "GET",
+      "path": "/v1/fetch/shippinglabel/",
+      "api": "Clickpost",
+      "summary": "Fetch Shipping Label"
+    }
+  },
+  {
+    "text": "API: Clickpost\nEndpoint: POST /v1/user/token/\nFull URL: https://www.clickpost.in/api/v1/user/token/\n\nSummary: Token based authentication\nDescription: This API allows you to generate an access token using a username and password\n\nRequest Body:\n  Content-Type: application/json\n  Required Fields:\n    - username (string) [optional]: Username of the enterprise account\n    - password (string) [optional]: Password of the user of the enterprise account\n\nResponses:\n  200: 200\n  400: 400\n",
+    "metadata": {
+      "endpoint": "POST /v1/user/token/",
+      "method": "POST",
+      "path": "/v1/user/token/",
+      "api": "Clickpost",
+      "summary": "Token based authentication"
+    }
+  }
+]
