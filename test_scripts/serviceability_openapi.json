@@ -1,0 +1,912 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Serviceability",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://serviceability.clickpost.in"
+    }
+  ],
+  "components": {
+    "securitySchemes": {}
+  },
+  "security": [
+    {}
+  ],
+  "paths": {
+    "/api/v1/serviceability_api/": {
+      "post": {
+        "summary": "Pincode Carrier Serviceability",
+        "description": "The API takes the pickup and drop Pincode and returns an array of all the serviceable carrier partners and their corresponding shipping charges and committed SLAs",
+        "operationId": "pincode-carrier-serviceability",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Enter the username of the Clickpost dashboard",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Enter the API key given to you by the Clickpost team",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "RAW_BODY"
+                ],
+                "properties": {
+                  "RAW_BODY": {
+                    "type": "string",
+                    "description": "Enter the request body",
+                    "format": "json"
+                  }
+                }
+              },
+              "examples": {
+                "Serviceability V1 Payload": {
+                  "value": [
+                    {
+                      "drop_pincode": "110020",
+                      "pickup_pincode": "122002"
+                    }
+                  ]
+                },
+                "Serviceability V1 Payload with Optional Parameters": {
+                  "value": [
+                    {
+                      "optional": {
+                        "length": 10,
+                        "breadth": 10,
+                        "height": 10,
+                        "invoice_value": 999,
+                        "weight": 10,
+                        "service_type": "FORWARD"
+                      },
+                      "drop_pincode": "380001",
+                      "pickup_pincode": "380015"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Success": {
+                    "value": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"SUCCESS\",\n        \"status\": 200\n    },\n    \"result\": [\n        {\n            \"cp_id\": 4,\n            \"service_type\": \"FORWARD\",\n            \"account_code\": \"Delhivery_Express_B2C\",\n            \"account_id\": 186907,\n            \"serviceable\": {\n                \"COD\": false,\n                \"PREPAID\": true,\n                \"EXCHANGE\": false\n            },\n            \"comitted_sla\": 1,\n            \"shipping_charge\": {\n                \"PREPAID\": 37.12,\n                \"COD\": 37.12\n            },\n            \"zone\": \"CITY\"\n        },\n        {\n            \"cp_id\": 4,\n            \"service_type\": \"FORWARD\",\n            \"account_code\": \"Delhivery_Surface_B2C\",\n            \"account_id\": 186908,\n            \"serviceable\": {\n                \"COD\": false,\n                \"PREPAID\": true,\n                \"EXCHANGE\": false\n            },\n            \"comitted_sla\": 1,\n            \"shipping_charge\": {\n                \"PREPAID\": 37.12,\n                \"COD\": 37.12\n            },\n            \"zone\": \"CITY\"\n        },\n        {\n            \"cp_id\": 4,\n            \"service_type\": \"FORWARD\",\n            \"account_code\": \"Delhivery_Surface_Heavy\",\n            \"account_id\": 186909,\n            \"serviceable\": {\n                \"COD\": false,\n                \"PREPAID\": true,\n                \"EXCHANGE\": false\n            },\n            \"comitted_sla\": 1,\n            \"shipping_charge\": {\n                \"PREPAID\": null,\n                \"COD\": null\n            },\n            \"zone\": \"CITY\"\n        },\n        {\n            \"cp_id\": 4,\n            \"service_type\": \"FORWARD\",\n            \"account_code\": \"Delhivery_Surface_Bulk\",\n            \"account_id\": 186915,\n            \"serviceable\": {\n                \"COD\": false,\n                \"PREPAID\": true,\n                \"EXCHANGE\": false\n            },\n            \"comitted_sla\": 1,\n            \"shipping_charge\": {\n                \"PREPAID\": null,\n                \"COD\": null\n            },\n            \"zone\": \"CITY\"\n        },\n        {\n            \"cp_id\": 6,\n            \"service_type\": \"FORWARD\",\n            \"account_code\": \"Xpressbees_Surface\",\n            \"account_id\": 187017,\n            \"serviceable\": {\n                \"COD\": false,\n                \"PREPAID\": true,\n                \"EXCHANGE\": false\n            },\n            \"comitted_sla\": 1,\n            \"shipping_charge\": {\n                \"PREPAID\": 40.89,\n                \"COD\": 78.65\n            },\n            \"zone\": \"CITY\"\n        },\n        {\n            \"cp_id\": 6,\n            \"service_type\": \"FORWARD\",\n            \"account_code\": \"Xpressbees_Express\",\n            \"account_id\": 187306,\n            \"serviceable\": {\n                \"COD\": false,\n                \"PREPAID\": true,\n                \"EXCHANGE\": false\n            },\n            \"comitted_sla\": 1,\n            \"shipping_charge\": {\n                \"PREPAID\": 46.27,\n                \"COD\": 46.27\n            },\n            \"zone\": \"CITY\"\n        }\n    ]\n}"
+                  },
+                  "Authentication Failed": {
+                    "value": "{\n    \"meta\": {\n        \"status\": 301,\n        \"message\": \"Authentication Failed: Invalid Token or API Key\",\n        \"success\": false\n    }\n}"
+                  },
+                  "Pincode not Serviceable": {
+                    "value": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"Pin code not serviceable\",\n        \"status\": 200\n    }\n}"
+                  }
+                },
+                "schema": {
+                  "oneOf": [
+                    {
+                      "title": "Success",
+                      "type": "object",
+                      "properties": {
+                        "meta": {
+                          "type": "object",
+                          "properties": {
+                            "success": {
+                              "type": "boolean",
+                              "example": true,
+                              "default": true
+                            },
+                            "message": {
+                              "type": "string",
+                              "example": "SUCCESS"
+                            },
+                            "status": {
+                              "type": "integer",
+                              "example": 200,
+                              "default": 0
+                            }
+                          }
+                        },
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "cp_id": {
+                                "type": "integer",
+                                "example": 4,
+                                "default": 0
+                              },
+                              "service_type": {
+                                "type": "string",
+                                "example": "FORWARD"
+                              },
+                              "account_code": {
+                                "type": "string",
+                                "example": "Delhivery_Express_B2C"
+                              },
+                              "account_id": {
+                                "type": "integer",
+                                "example": 186907,
+                                "default": 0
+                              },
+                              "serviceable": {
+                                "type": "object",
+                                "properties": {
+                                  "COD": {
+                                    "type": "boolean",
+                                    "example": false,
+                                    "default": true
+                                  },
+                                  "PREPAID": {
+                                    "type": "boolean",
+                                    "example": true,
+                                    "default": true
+                                  },
+                                  "EXCHANGE": {
+                                    "type": "boolean",
+                                    "example": false,
+                                    "default": true
+                                  }
+                                }
+                              },
+                              "comitted_sla": {
+                                "type": "integer",
+                                "example": 1,
+                                "default": 0
+                              },
+                              "shipping_charge": {
+                                "type": "object",
+                                "properties": {
+                                  "PREPAID": {
+                                    "type": "number",
+                                    "example": 37.12,
+                                    "default": 0
+                                  },
+                                  "COD": {
+                                    "type": "number",
+                                    "example": 37.12,
+                                    "default": 0
+                                  }
+                                }
+                              },
+                              "zone": {
+                                "type": "string",
+                                "example": "CITY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "title": "Authentication Failed",
+                      "type": "object",
+                      "properties": {
+                        "meta": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "integer",
+                              "example": 301,
+                              "default": 0
+                            },
+                            "message": {
+                              "type": "string",
+                              "example": "Authentication Failed: Invalid Token or API Key"
+                            },
+                            "success": {
+                              "type": "boolean",
+                              "example": false,
+                              "default": true
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "title": "Pincode not Serviceable",
+                      "type": "object",
+                      "properties": {
+                        "meta": {
+                          "type": "object",
+                          "properties": {
+                            "success": {
+                              "type": "boolean",
+                              "example": true,
+                              "default": true
+                            },
+                            "message": {
+                              "type": "string",
+                              "example": "Pin code not serviceable"
+                            },
+                            "status": {
+                              "type": "integer",
+                              "example": 200,
+                              "default": 0
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/v3/serviceability_api/": {
+      "post": {
+        "summary": "Drop Pincode Serviceability",
+        "description": "By entering the drop_pincode, the enterprises can determine whether the Pincode is serviceable by any of their active carriers or not.",
+        "operationId": "pincode-serviceability",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Enter the username of the Clickpost dashboard",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Enter the API key given to you by the Clickpost team",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "RAW_BODY"
+                ],
+                "properties": {
+                  "RAW_BODY": {
+                    "type": "string",
+                    "description": "Enter the request body",
+                    "default": "[     {         \"drop_pincode\": \"110020\"     } ]",
+                    "format": "json"
+                  }
+                }
+              },
+              "examples": {
+                "Serviceability V3 Payload": {
+                  "value": [
+                    {
+                      "drop_pincode": "110020"
+                    }
+                  ]
+                },
+                "Serviceability V3 Payload with Optional Parameters": {
+                  "value": [
+                    {
+                      "order_type": "COD",
+                      "pickup_pincode": "23",
+                      "service_type": "FORWARD'/ 'RVP'/EXCHANGE",
+                      "drop_pincode": "380001"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"SUCCESS\",\n        \"status\": 200\n    },\n    \"result\": {\n        \"serviceable\": true,\n        \"COD\": true,\n        \"PREPAID\": true,\n        \"EXCHANGE\": false\n    }\n}"
+                  },
+                  "Result when Order Type is passsed as COD": {
+                    "value": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"SUCCESS\",\n        \"status\": 200\n    },\n    \"result\": {\n        \"serviceable\": true,\n        \"COD\": true,\n    }\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean",
+                          "example": true,
+                          "default": true
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "SUCCESS"
+                        },
+                        "status": {
+                          "type": "integer",
+                          "example": 200,
+                          "default": 0
+                        }
+                      }
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "serviceable": {
+                          "type": "boolean",
+                          "example": true,
+                          "default": true
+                        },
+                        "COD": {
+                          "type": "boolean",
+                          "example": true,
+                          "default": true
+                        },
+                        "PREPAID": {
+                          "type": "boolean",
+                          "example": true,
+                          "default": true
+                        },
+                        "EXCHANGE": {
+                          "type": "boolean",
+                          "example": false,
+                          "default": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/v1/bulk_serviceability_api/": {
+      "get": {
+        "summary": "Bulk Serviceability",
+        "description": "By entering the carrier partner ID and account code, the enterprise can get all the serviceable drop and pickup pincodes",
+        "operationId": "bulk-serviceability",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Enter the username of the Clickpost dashboard",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "username"
+            }
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Enter the API key given to you by the Clickpost team",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "courier_partner_id",
+            "in": "query",
+            "description": "The courier partner ID from the Clickpost dashboard",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "4"
+            }
+          },
+          {
+            "name": "account_code",
+            "in": "query",
+            "description": "Name registered on Clickpost dashboard for particular carrier partner",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Delhivery_Express_B2C"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{\n    \"result\": {\n        \"pickup_pincodes\": {\n            \"PREPAID\": [ \"700107\",\n            \"400079\",\n            \"110028\",\n            \"560039\",\n            \"700010\"],\n            \"EXCHANGE\": [ \"700107\",\n            \"400079\",\n            \"110028\",\n            \"560039\",\n            \"700010\"]\n        },\n        \"drop_pincodes\": {\n            \"PREPAID\": [ \"700107\",\n            \"400079\",\n            \"110028\",\n            \"560039\",\n            \"700010\"],\n            \"EXCHANGE\": [ \"700107\",\n            \"400079\",\n            \"110028\",\n            \"560039\",\n            \"700010\"\n\n            ]\n        }\n    },\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"Success\",\n        \"success\": true\n    }\n}"
+                  },
+                  "400 Error": {
+                    "value": "{\n    \"meta\": {\n        \"status\": 400,\n        \"message\": \"Field 'partner_id' expected a number but got '\\\"4\\\"'.\",\n        \"success\": false\n    }\n}"
+                  },
+                  "Invalid account code/ courier partner id": {
+                    "value": "{\n    \"meta\": {\n        \"status\": 400,\n        \"message\": \"Invalid account code/ courier partner id\",\n        \"success\": false\n    }\n}"
+                  }
+                },
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "pickup_pincodes": {
+                              "type": "object",
+                              "properties": {
+                                "PREPAID": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "example": "700107"
+                                  }
+                                },
+                                "EXCHANGE": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "example": "700107"
+                                  }
+                                }
+                              }
+                            },
+                            "drop_pincodes": {
+                              "type": "object",
+                              "properties": {
+                                "PREPAID": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "example": "700107"
+                                  }
+                                },
+                                "EXCHANGE": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "example": "700107"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "meta": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "integer",
+                              "example": 200,
+                              "default": 0
+                            },
+                            "message": {
+                              "type": "string",
+                              "example": "Success"
+                            },
+                            "success": {
+                              "type": "boolean",
+                              "example": true,
+                              "default": true
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "title": "400 Error",
+                      "type": "object",
+                      "properties": {
+                        "meta": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "integer",
+                              "example": 400,
+                              "default": 0
+                            },
+                            "message": {
+                              "type": "string",
+                              "example": "Field 'partner_id' expected a number but got '\"4\"'."
+                            },
+                            "success": {
+                              "type": "boolean",
+                              "example": false,
+                              "default": true
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "title": "Invalid account code/ courier partner id",
+                      "type": "object",
+                      "properties": {
+                        "meta": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "integer",
+                              "example": 400,
+                              "default": 0
+                            },
+                            "message": {
+                              "type": "string",
+                              "example": "Invalid account code/ courier partner id"
+                            },
+                            "success": {
+                              "type": "boolean",
+                              "example": false,
+                              "default": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "405",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Method Not Allowed": {
+                    "value": "{\n    \"detail\": \"Method \\\"POST\\\" not allowed.\"\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "string",
+                      "example": "Method \"POST\" not allowed."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/v1/serviceable_drop_pincode/": {
+      "get": {
+        "summary": "Fetch Drop pincodes",
+        "description": "By entering the username and key, the enterprise can get all the serviceable drop pin codes, enterprise can get all the serviceable drop pin codes for all of the carrier partners combined",
+        "operationId": "get-all-drop-pincodes",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Enter the username of the Clickpost dashboard",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "username"
+            }
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Enter the API key given to you by the Clickpost team",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "SUCCESS": {
+                    "value": "{\n    \"meta\": {\n        \"status\": 200,\n        \"message\": \"Success\",\n        \"success\": true\n    },\n    \"result\": {\n        \"drop_pincodes\": {\n            \"PREPAID\": [\n                \"382867\",\n                \"676123\",\n                \"281502\",\n                \"815317\",\n                \"455335\",\n                \"768045\",\n                \"641002\"\n            ],\n            \"COD\": [\n                \"382867\",\n                \"676123\",\n                \"281502\",\n                \"815317\",\n                \"455335\",\n                \"768045\",\n                \"641002\"\n            ]\n        }\n    }\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "integer",
+                          "example": 200,
+                          "default": 0
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Success"
+                        },
+                        "success": {
+                          "type": "boolean",
+                          "example": true,
+                          "default": true
+                        }
+                      }
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "drop_pincodes": {
+                          "type": "object",
+                          "properties": {
+                            "PREPAID": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "example": "382867"
+                              }
+                            },
+                            "COD": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "example": "382867"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/v1/pincode_search_overall/": {
+      "get": {
+        "summary": "Pincode Serviceability Check",
+        "description": "The API takes the pincode and returns an array of all the serviceable carrier partners",
+        "operationId": "pincode-serviceability-check",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Enter the username of the Clickpost dashboard",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Enter the API key given to you by the Clickpost team",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pincode",
+            "in": "query",
+            "description": "The PIN code of the location for which you want to check serviceability",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "380001"
+            }
+          },
+          {
+            "name": "is_pickup_pincode",
+            "in": "query",
+            "description": "Set as true if you want to check if the location is serviceable for pick up. Set as false otherwise",
+            "required": true,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "is_rvp",
+            "in": "query",
+            "description": "Set as true if you want to check if the location is serviceable for reverse pick up. Set as false otherwise",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "false"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Success": {
+                    "value": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"SUCCESS\",\n        \"status\": 200\n    },\n    \"result\": [\n        {\n            \"account_type__account_name\": \"Symphony_Delhivery\",\n            \"account_type__courier_partner__name\": \"Delhivery\",\n            \"pickup_pincode_serviceability__order_type\": \"PREPAID\"\n        },\n        {\n            \"account_type__account_name\": \"ESB_Delhivery_Forward_500g_Express\",\n            \"account_type__courier_partner__name\": \"Delhivery\",\n            \"pickup_pincode_serviceability__order_type\": \"PREPAID\"\n        },\n        {\n            \"account_type__account_name\": \"ESB_Delhivery_Forward_500g_Surface\",\n            \"account_type__courier_partner__name\": \"Delhivery\",\n            \"pickup_pincode_serviceability__order_type\": \"PREPAID\"\n        },\n        {\n            \"account_type__account_name\": \"ESB_Delhivery_60KG\",\n            \"account_type__courier_partner__name\": \"Delhivery\",\n            \"pickup_pincode_serviceability__order_type\": \"PREPAID\"\n        },\n        {\n            \"account_type__account_name\": \"ESB_Xpressbees_Foward_500g_Express\",\n            \"account_type__courier_partner__name\": \"XpressBees\",\n            \"pickup_pincode_serviceability__order_type\": \"PREPAID\"\n        },\n        {\n            \"account_type__account_name\": \"ESB_Xpressbees_Foward_500g_Surface\",\n            \"account_type__courier_partner__name\": \"XpressBees\",\n            \"pickup_pincode_serviceability__order_type\": \"PREPAID\"\n        },\n        {\n            \"account_type__account_name\": \"ESB_Ecomexpress_EXS_Forward\",\n            \"account_type__courier_partner__name\": \"EcomExpress\",\n            \"pickup_pincode_serviceability__order_type\": \"PREPAID\"\n        },\n        {\n            \"account_type__account_name\": \"ESB_Ecomexpress_EGS_Forward\",\n            \"account_type__courier_partner__name\": \"EcomExpress\",\n            \"pickup_pincode_serviceability__order_type\": \"PREPAID\"\n        },\n        {\n            \"account_type__account_name\": \"ESB_Smartr_Forward\",\n            \"account_type__courier_partner__name\": \"Smartr\",\n            \"pickup_pincode_serviceability__order_type\": \"PREPAID\"\n        },\n        {\n            \"account_type__account_name\": \"ESB_Smartr_Reverse\",\n            \"account_type__courier_partner__name\": \"Smartr\",\n            \"pickup_pincode_serviceability__order_type\": \"PREPAID\"\n        },\n        {\n            \"account_type__account_name\": \"ATS Courier\",\n            \"account_type__courier_partner__name\": \"ATS (Amazon Transportation Services)\",\n            \"pickup_pincode_serviceability__order_type\": \"PREPAID\"\n        },\n        {\n            \"account_type__account_name\": \"ESB_DTDC_Forward_Express\",\n            \"account_type__courier_partner__name\": \"DTDC\",\n            \"pickup_pincode_serviceability__order_type\": \"PREPAID\"\n        },\n        {\n            \"account_type__account_name\": \"ESB_DTDC_Forward_Surface\",\n            \"account_type__courier_partner__name\": \"DTDC\",\n            \"pickup_pincode_serviceability__order_type\": \"PREPAID\"\n        }\n    ]\n}"
+                  },
+                  "Authentication Failed": {
+                    "value": "{\n    \"meta\": {\n        \"status\": 301,\n        \"message\": \"Authentication Failed: Invalid Token or API Key\",\n        \"success\": false\n    }\n}"
+                  },
+                  "Pincode not Serviceable": {
+                    "value": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"Pin code not serviceable\",\n        \"status\": 200\n    }\n}"
+                  }
+                },
+                "schema": {
+                  "oneOf": [
+                    {
+                      "title": "Success",
+                      "type": "object",
+                      "properties": {
+                        "meta": {
+                          "type": "object",
+                          "properties": {
+                            "success": {
+                              "type": "boolean",
+                              "example": true,
+                              "default": true
+                            },
+                            "message": {
+                              "type": "string",
+                              "example": "SUCCESS"
+                            },
+                            "status": {
+                              "type": "integer",
+                              "example": 200,
+                              "default": 0
+                            }
+                          }
+                        },
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "account_type__account_name": {
+                                "type": "string",
+                                "example": "Symphony_Delhivery"
+                              },
+                              "account_type__courier_partner__name": {
+                                "type": "string",
+                                "example": "Delhivery"
+                              },
+                              "pickup_pincode_serviceability__order_type": {
+                                "type": "string",
+                                "example": "PREPAID"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "title": "Authentication Failed",
+                      "type": "object",
+                      "properties": {
+                        "meta": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "integer",
+                              "example": 301,
+                              "default": 0
+                            },
+                            "message": {
+                              "type": "string",
+                              "example": "Authentication Failed: Invalid Token or API Key"
+                            },
+                            "success": {
+                              "type": "boolean",
+                              "example": false,
+                              "default": true
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "title": "Pincode not Serviceable",
+                      "type": "object",
+                      "properties": {
+                        "meta": {
+                          "type": "object",
+                          "properties": {
+                            "success": {
+                              "type": "boolean",
+                              "example": true,
+                              "default": true
+                            },
+                            "message": {
+                              "type": "string",
+                              "example": "Pin code not serviceable"
+                            },
+                            "status": {
+                              "type": "integer",
+                              "example": 200,
+                              "default": 0
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Result": {
+                    "value": "{}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  },
+  "x-readme-fauxas": true
+}
